@@ -15,15 +15,6 @@
       "filterable": 1
     },
     {
-      "key": "YunDuo",
-      "name": "☁️┆云朵┆4K",
-      "type": 3,
-      "api": "csp_YunDuo",
-      "searchable": 1,
-      "changeable": 1,
-      "filterable": 1
-    },
-    {
       "key": "CupFox",
       "name": "☕┆茶杯┆4K",
       "type": 3,
@@ -31,39 +22,6 @@
       "searchable": 1,
       "changeable": 1,
       "filterable": 1
-    },
-    {
-      "key": "BuBu",
-      "name": "🧸┆布布┆4K",
-      "type": 3,
-      "api": "csp_BuBu",
-      "searchable": 1,
-      "changeable": 1,
-      "filterable": 1
-    },
-    {
-      "key": "push_agent",
-      "name": "💌┆推送┆接收",
-      "type": 3,
-      "api": "csp_Push",
-      "searchable": 0,
-      "changeable": 0,
-      "indexs": 0,
-      "timeout": 60
-    },
-    {
-      "key": "Wallpaper",
-      "name": "🖼️┆摸鱼┆壁纸库",
-      "type": 3,
-      "api": "csp_Wallpaper",
-      "searchable": 0,
-      "indexs": 0,
-      "quickSearch": 0,
-      "filterable": 0,
-      "style": {
-        "type": "rect",
-        "ratio": 0.56
-      }
     }
   ],
   "lives": [
