@@ -1,17 +1,72 @@
 
 {
-  "spider": "https://zhuyu-prod-1256652038.cos.ap-guangzhou.myqcloud.com/AQc5us3Gh5jq/fish07021147.jar;md5;24c56f0c87f0b14c5cb8094e6bcc6787",
+  "spider": "https://tc-new.z.wiki/autoupload/iYHTWVx6T8RrCmqdGD6MOdiO_OyvX7mIgxFBfDMDErs/20260709/0572/fish07091010.jar;md5;203c1b3800c609f605ce8b30111d6402",
   "logo": "https://modelscope-resouces.oss-cn-zhangjiakou.aliyuncs.com/avatar%2Ff5309172-1af6-4c4f-a1c5-a4773a1cc718.gif",
   "wallpaper": "http://127.0.0.1:9978/proxy?do=wallpaper",
   "danmaku": "http://127.0.0.1:5266/danmu/webhtv?name={name}&episode={episode}",
-  "sites": [	
+  "sites": [
     {
       "key": "Douban",
       "name": "🌕️┆片单┆精选",
       "type": 3,
-      "api": "csp_Douban",
+      "api": "csp_PianDan",
       "indexs": 1,
       "searchable": 0,
+      "filterable": 1,
+      "ext": {
+        "home": {
+          "douban": "https://6800.kstore.vip/douban.json",
+          "tmdb": "https://6800.kstore.vip/tmdb.json"
+        }
+      }
+    },
+    {
+      "key": "FishConfig",
+      "name": "🍼┆设置┆中心",
+      "type": 3,
+      "api": "csp_FishConfig"
+    },
+    {
+      "key": "Wogg",
+      "name": "👽️┆玩偶┆4K",
+      "type": 3,
+      "api": "csp_Wogg",
+      "searchable": 1,
+      "changeable": 1,
+      "filterable": 1,
+      "ext": {
+        "site": [
+          "https://wogg.xxooo.cf",
+          "https://woggpan.888484.xyz",
+          "https://wogg.333232.xyz",
+          "http://woggpan.xxooo.cf",
+          "https://www.wogg.one"
+        ],
+        "filter": "https://tc-new.z.wiki/autoupload/iYHTWVx6T8RrCmqdGD6MOdiO_OyvX7mIgxFBfDMDErs/20260320/oOf4/wogg.json"
+      }
+    },
+    {
+      "key": "FishMuou",
+      "name": "🪵┆木偶┆4K",
+      "type": 3,
+      "api": "csp_FishCloud",
+      "searchable": 1,
+      "ext": {
+        "site": [
+          "https://123.666291.xyz",
+          "https://666.666291.xyz",
+          "https://www.muou.site",
+          "https://www.muou.asia"
+        ]
+      }
+    },
+    {
+      "key": "YunDuo",
+      "name": "☁️┆云朵┆4K",
+      "type": 3,
+      "api": "csp_YunDuo",
+      "searchable": 1,
+      "changeable": 1,
       "filterable": 1
     },
     {
@@ -22,6 +77,105 @@
       "searchable": 1,
       "changeable": 1,
       "filterable": 1
+    },
+    {
+      "key": "FengYe",
+      "name": "🍁┆枫叶┆4K",
+      "type": 3,
+      "api": "csp_CupFox",
+      "searchable": 1,
+      "changeable": 1,
+      "filterable": 1,
+      "ext": "ASrqK2y8hBjF6nWBT4VA6nl6pMHBuUkTFU8G1oArN4pFIRBIK3Koep4Mpa+rHr3EEKPvWTsPKevEKAGNJkBG3jYkvcbsm4uMR4SEGFXEVUK5k5GC1r3GrXXjDgc1ezNOEnVyK6ZdKI+xk/a/S3HSnknsxpSteN1SyaZ76LlkHDg8oTcmvsm6VWIJmoLG+EXXFO47gkwl6Z2cGWF6122DYXd9rqv5d1nPkPmMRFOjZmeIQwGet75HMuUQH2SD6tMhrHwqOVYxsZhaEJyp6C5P7lQgMd2fNfTUjdB8IXkeVnT+wuAKOiT09go+UHAmjghG58OMf/v/2ou2/Ojv5RTxZkUiiLZ5tUfJMSW87nNKi1Ak4w3wJ2h0OBR83irMrQjD68TCU0pG+ecPOjclNg7OFlbYxsLd0PPUBDQOAxFhq9+IpEgRp04Fi5Eb9B2exKN8CXuEoyf6ISv5l7FkIamTpm0="
+    },
+    {
+      "key": "BuBu",
+      "name": "🧸┆布布┆4K",
+      "type": 3,
+      "api": "csp_BuBu",
+      "searchable": 1,
+      "changeable": 1,
+      "filterable": 1
+    },
+    {
+      "key": "huaisang",
+      "name": "🎄┆怀桑┆4K",
+      "type": 3,
+      "api": "csp_AppQi",
+      "searchable": 1,
+      "changeable": 1,
+      "ext": "AdYEovlEKsDy77+R58YGahWCxrDZyBxExcQNC2NSeH0n1b5mu6tvh8b4Eh0RCpoPF6eivKdrR1Hsb8X4sSVBS8zF6jkwLW+wze9yh+hSY5iimm4gM9mAtmt0obTi+6Iox/Jp4GCsN4MQyFebMK162SKnILklpXc1UMiJv9gnPOe5aOPUxCftL+x7/UGhBdFYWIegpiHvKeavUtCUkhxtDyC8KqVVPPW0StI5GdmUA3WBbnnrNiKqNc5GBmrffd6pDN+Cf9IIjzNNvos/5KXJmBbe/baAzTLkoafeIoDhO451"
+    },
+    {
+      "key": "清沅",
+      "name": "❄️┆清沅┆4K",
+      "api": "csp_AppNox",
+      "type": 3,
+      "ext": "ASjKEhQKe/DZHt0fbLID47aB3aYcWUG5aIPwrmTCgGinaSykux5CZpbz57zl1moRZGFkoEXqk7decpKNU6W/p/6OTfj3JWvZtr89yPZSxNyjJm1Il5upXQT68sXR/0WG392H71MN7Q8NC8xkSOuwAq7EfX2cuHMsiqFeCCugzAiINUiEqvboCFdXiI97C6kqqqiaQIS9d+R1r7krr5vQXWtky7XJNsiK5ACjppyTh68cbONYIcgLp5Kg5woh/wj9xmNT6mFGqF2D3j2RUaLoWYf+K1+ltBiuzZ7THWKwrnpBBig8XUAG3lXNXiFhPILyYWfr+1j/UoInhNITzJJ+SSRc88KmOk5kpch+idGzVMzHIq/bLpRRxE0iV8Qdtc2atKF9QUqPXJLrwv21Dl+nxgPEGOZ+71L+gABeQdvXO7xvyzUnd+rOidPJr1mBsfu9ySbcqHkhL5EIEQpGHwRhG/yN3Y5xj0BU+SdSxnDo+CwMC+g+WCts34c2u8h2tz7G5vuTw8QvDF23kF/BZeD2QaoCBAd3SDG9ObAichfuO1nDa938+Ul+iekNOEPtPFr6k5o+px/JJkE7MKYhekE/2JfmIkbkBHdnewJYckdM37/9EKsnAozbDyFKhfKR06Es52KtuAhGyh1B8uyfsj33qFpreAqGam8kjEHdYA0i832o0BtTU2gS3mf3NoijVH/XNmlJRuNXo9yYxdjuip4Eq4iqIgajM16MGAIJ0rumYhxJ5uJUFDlf55b9iS+DvJ8wotnBvfdINpAaeXPPlVc/1JDp1rIOw0qg2XIRAafLL7kzXnW8djs2dPSQU1+j9LIrfQ6u3k4lqUs9gRMW1JhwC/4iqimnwg0KsVValaplt+fxFHhwCCkS45uLf8BaY+UZtp5ZDffbi3Q0EDAK8F210Bzd5l8W8MokURUSj374Z7y2hAROBAAgZ8qWRrFOmBC+I+LUCm7sV4h7Mwdpe8sDAtxBhxOpBAYyV8eACQsDbnQsBvizlafy16ptRrArViG0uB1VSPqvi8gqcFD1zMl+uRo="
+    },
+    {
+      "key": "zhiqiu",
+      "name": "☘️┆听风┆知秋",
+      "type": 3,
+      "api": "csp_zhiqiu",
+      "searchable": 1,
+      "ext": "http://www.小不点.com/api//2026/zhiqiu.php"
+    },
+    {
+      "key": "三秋影视",
+      "name": "🍂┆三秋┆APP",
+      "api": "csp_App3Q",
+      "type": 3,
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0
+    },
+    {
+      "key": "FishZhizhen",
+      "name": "💫┆至臻┆4K",
+      "type": 3,
+      "api": "csp_FishCloud",
+      "searchable": 1,
+      "ext": {
+        "site": [
+          "https://mihdr.top",
+          "https://www.mihdr.top",
+          "https://www.miqk.cc",
+          "https://zhizhenpan.com/",
+          "https://zhizhen8.click",
+          "https://www.zhizhen8.click"
+        ]
+      }
+    },
+    {
+      "key": "FishDuoduo",
+      "name": "🍀┆多多┆4K",
+      "type": 3,
+      "api": "csp_FishCloud",
+      "searchable": 1,
+      "ext": {
+        "site": [
+          "https://tv.yydsys.top",
+          "https://tv.yydsys.cc",
+          "https://tv.214521.xyz"
+        ]
+      }
+    },
+    {
+      "key": "FishErxiao",
+      "name": "🍒┆二小┆4K",
+      "type": 3,
+      "api": "csp_FishCloud",
+      "searchable": 1,
+      "ext": {
+        "site": [
+          "https://www.erixaopan.fun",
+          "https://www.wexwp.cc",
+          "https://wexwp.cc",
+          "https://2xiaopan.top",
+          "https://www.2xiaopan.top"
+        ]
+      }
     }
   ]
 }
