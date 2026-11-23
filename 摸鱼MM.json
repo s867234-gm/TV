@@ -22,15 +22,6 @@
       }
     },
     {
-      "key": "YGP",
-      "name": "🔔┆新片┆预告",
-      "type": 3,
-      "api": "csp_YGP",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-    {
       "key": "FishConfig",
       "name": "🍼┆设置┆中心",
       "type": 3,
