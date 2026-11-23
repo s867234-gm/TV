@@ -1,0 +1,146 @@
+name: 自动同步更新MM配置
+
+on:
+  schedule:
+    # 国际时间(UTC) 每天 02:00（即北京时间 10:00），每 2 天自动执行一次
+    - cron: '0 2 */2 * *'
+  workflow_dispatch: # 允许在 GitHub Actions 页面手动点击一键立即运行测试
+
+permissions:
+  contents: write # 赋予 Actions 写入并提交仓库代码的权限
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出仓库代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Python 环境
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: 执行增量更新逻辑
+        run: |
+          python - << 'EOF'
+          import urllib.request
+          import json
+          import ssl
+          import copy
+          import os
+
+          # 配置两组文件映射关系
+          TASKS = [
+              {
+                  "name": "摸鱼",
+                  "local_file": "摸鱼MM.json",
+                  "remote_url": "https://6800.kstore.vip/fish.json"
+              },
+              {
+                  "name": "王二小",
+                  "local_file": "王二小MM.json",
+                  "remote_url": "https://9280.kstore.vip/newwex.json"
+              }
+          ]
+
+          def fetch_json(url):
+              ctx = ssl.create_default_context()
+              ctx.check_hostname = False
+              ctx.verify_mode = ssl.CERT_NONE
+              headers = {
+                  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+              }
+              req = urllib.request.Request(url, headers=headers)
+              with urllib.request.urlopen(req, timeout=25, context=ctx) as resp:
+                  return json.loads(resp.read().decode('utf-8', errors='ignore'))
+
+          def update_a_from_b(a_data, b_data):
+              res = copy.deepcopy(a_data)
+
+              # 1. 更新 A 中现有的基础字段（spider、wallpaper、logo、doh、rules、ads 等）
+              for k in a_data:
+                  if k not in ['sites', 'lives', 'live'] and k in b_data:
+                      res[k] = copy.deepcopy(b_data[k])
+
+              # 2. 检查 A 当前所有的 sites 项，仅对 A 拥有的项目从 B 中同步最新配置
+              if 'sites' in a_data and isinstance(a_data['sites'], list) and 'sites' in b_data and isinstance(b_data['sites'], list):
+                  b_sites_by_key = {s.get('key'): s for s in b_data['sites'] if isinstance(s, dict) and 'key' in s}
+                  b_sites_by_name = {s.get('name'): s for s in b_data['sites'] if isinstance(s, dict) and 'name' in s}
+                  
+                  new_sites = []
+                  for a_site in a_data['sites']:
+                      if not isinstance(a_site, dict):
+                          new_sites.append(a_site)
+                          continue
+                      key = a_site.get('key')
+                      name = a_site.get('name')
+                      
+                      matched_b = None
+                      if key and key in b_sites_by_key:
+                          matched_b = b_sites_by_key[key]
+                      elif name and name in b_sites_by_name:
+                          matched_b = b_sites_by_name[name]
+
+                      if matched_b:
+                          new_sites.append(copy.deepcopy(matched_b))
+                      else:
+                          # 若 B 中找不到（用户手动添加的私有源），保留 A 原始配置不变
+                          new_sites.append(copy.deepcopy(a_site))
+                  res['sites'] = new_sites
+
+              # 3. 直播 live 项：B 完全覆盖 A
+              if 'lives' in b_data:
+                  res['lives'] = copy.deepcopy(b_data['lives'])
+                  if 'live' in res and 'live' != 'lives':
+                      del res['live']
+              elif 'live' in b_data:
+                  res['live'] = copy.deepcopy(b_data['live'])
+                  if 'lives' in res and 'lives' != 'live':
+                      del res['lives']
+
+              return res
+
+          for task in TASKS:
+              local_path = task["local_file"]
+              remote_url = task["remote_url"]
+              print(f"\n===== 开始处理: {task['name']} =====")
+
+              if not os.path.exists(local_path):
+                  print(f"警告: 本地文件 {local_path} 不存在，跳过。")
+                  continue
+
+              try:
+                  with open(local_path, 'r', encoding='utf-8') as f:
+                      a_data = json.load(f)
+              except Exception as e:
+                  print(f"读取本地 A 文件失败: {e}")
+                  continue
+
+              try:
+                  b_data = fetch_json(remote_url)
+              except Exception as e:
+                  print(f"拉取远程 B 文件失败 ({remote_url}): {e}")
+                  continue
+
+              new_a = update_a_from_b(a_data, b_data)
+
+              # 写入更新后的内容（保持 UTF-8 与缩进美化）
+              with open(local_path, 'w', encoding='utf-8') as f:
+                  json.dump(new_a, f, ensure_ascii=False, indent=2)
+                  f.write('\n')
+              print(f"成功根据最新内容更新: {local_path}")
+          EOF
+
+      - name: 提交并推送到仓库
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add "摸鱼MM.json" "王二小MM.json"
+          if git diff --staged --quiet; then
+            echo "没有检测到任何内容变更，跳过提交。"
+          else
+            git commit -m "Auto update MM configs from upstream [skip ci]"
+            git push
+            echo "更新已自动提交并推送到仓库！"
+          fi
